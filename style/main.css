@@ -1,0 +1,108 @@
+/* 
+    Document   : main
+    Created on : Dec 1, 2011, 1:40:45 AM
+    Author     : hoa
+    Description:
+        Purpose of the stylesheet follows.
+*/
+body {
+    overflow: hidden;
+    background-color:#e0dfe4;
+    margin: 0;
+}
+#left {
+    float:left;
+    width:21%;
+    height: 100%;
+    overflow: auto;
+}
+.box {
+    margin: 10px auto;padding: 5px;
+    width: 90%;
+    border: 2px solid #e0dfe4;
+    background-color: white;
+    -moz-border-radius: 5px;border-radius: 5px;
+    -moz-box-shadow: 0 0 5px #333;-webkit-box-shadow: 0 0 5px #333;box-shadow: 0 0 5px #333;
+}
+.box-title {
+    margin-left: 20px;
+    font-family: serif;
+    font-weight: bold;
+}
+
+#viewer {
+    float:right;
+    width: 79%;
+    height: 100%;
+    overflow: auto;
+}
+
+/**
+* VIEWER
+**/
+#viewer {
+    position: relative;
+}
+/*
+.page {
+    position: relative;
+    margin: 5px 0 5px 1px;
+    vertical-align: middle;
+}
+*/
+.layer-before-canvas {
+    position: absolute;
+    background-color: transparent;
+}
+
+canvas {
+    position: absolute;
+    background-color: #FFFFFF;
+    -moz-box-shadow: 3px 3px 5px #333;
+    -webkit-box-shadow: 3px 3px 5px #333;
+    box-shadow: 3px 3px 5px #333;
+}
+
+input {
+    border: 1px solid #7F9FB6;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: bold;
+    margin: 3px;
+    padding: 2px;
+}
+
+/**
+* BUTTON STYLE
+**/
+input.object-button {
+    width:  50px;
+    height: 50px;
+}
+input#none-object {
+    background: transparent url("icons/click.png") no-repeat center;
+}
+input#none-object:hover {
+    background-color: #e0dfe4;
+}
+
+
+input#add-text {
+    background: transparent url("icons/character-set.png") no-repeat center;
+}
+input#add-text:hover {
+    background-color: #e0dfe4;
+}
+
+input#add-image {
+    background: transparent url("icons/insert-image-3.png") no-repeat center;
+}
+input#add-image:hover {
+    background-color: #e0dfe4;
+}
+
+input#eraser {
+    background: transparent url("icons/draw-eraser-2.png") no-repeat center;
+}
+input#eraser:hover {
+    background-color: #e0dfe4;
+}

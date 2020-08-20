@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style>
+            body {
+                text-align: center;
+                margin-left: 0;
+                margin-top: 10px;
+                margin-right: 10px;
+                margin-bottom: 10px;
+            }
+            canvas {
+                margin-left: 0;
+                margin-top: 5px;
+                margin-right: 5px;
+                margin-bottom: 5px;
+                border:1px solid #000000;
+                background-color: #FFFFFF;
+                vertical-align: middle;
+                display: inline-block;
+            }
+            .shadow {
+              -moz-box-shadow: 3px 3px 5px #333;
+              -webkit-box-shadow: 3px 3px 5px #333;
+              box-shadow: 3px 3px 5px #333;
+            }
+        </style>
+        <script type="text/javascript" src="libs/pdf.js"></script>
+        <script type="text/javascript">
+            var ratio=1.5;
+            PDFJS.workerSrc = "libs/pdf.js";
+            PDFJS.getPdf('files/example.pdf', function getPdfFile(data) {
+                var pdf = new PDFJS.PDFDoc(data);
+                var pageNum = pdf.numPages;
+                var pages=[];
+                var scale = ratio;
+                var i;
+                
+                //Tải các trang pdf vào mảng pages
+                //các trang pdf được tính từ 1, nhưng mảng pages bắt đầu tính từ 0.
+                for (i=1;i<=pageNum;i++) {
+                    pages.push(pdf.getPage(i));
+                }
+                
+                for (i=0;i<pageNum;i++) {
+                    var div = document.createElement("div");
+                    div.id = "page-div-" + i;
+                    var canvas = document.createElement("canvas");
+                    canvas.id = 'page-canvas-' + i;
+                    canvas.className="shadow";
+                    var anchor = document.createElement("a");
+                    anchor.name = 'page-a-' + i;
+                    
+                    var context = canvas.getContext('2d');
+                    canvas.height = pages[i].height * scale;
+                    canvas.width = pages[i].width * scale;
+                    pages[i].startRendering(context);
+                    
+                    div.appendChild(anchor);
+                    div.appendChild(canvas);
+                    
+                    document.getElementById("viewer").appendChild(div);
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div id="viewer"></div>
+    </body>
+</html>

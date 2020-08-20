@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+        <title>Auto Docs Project</title>
+        <link rel="stylesheet" href="style/main.css"/>
+        <link type="text/css" href="style/ui-lightness/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+        <script type="text/javascript" src="libs/pdf.js"></script>
+        <script type="text/javascript" src="libs/jquery-1.6.2.min.js"></script>
+        <script type="text/javascript" src="libs/jquery-ui-1.8.16.custom.min.js"></script>
+        <script type="text/javascript" src="libs/getpdf.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(e) {
+                alert("Bạn có thể bắt đầu tạo mẫu tài liệu ngay bây giờ !\n"+$('#canvas-0').attr("height"));
+                $('#layer-for-canvas-0').click(function(e) {
+                    var posX = $(this).offset().left;
+                    var posY = $(this).offset().top;
+                    $('#xPos').val(Math.round(e.pageX - posX));
+                    $('#yPos').val(Math.round(e.pageY - posY));
+                });
+            });
+            var obj=0;
+            function clickMouse() {
+                obj=0;
+            }
+            function clickText() {
+                obj=1;
+                var element = document.createElement("span");
+                element.innerHTML = "Xin chào các bạn";
+		element.setAttribute("id","dragable");
+		//element.setAttribute("oncontextmenu","Field.remove(event, this);return false;");
+		element.setAttribute("style", "left:0px;top:0px;");
+		document.getElementById("layer-for-canvas-0").appendChild(element);
+            }
+            function clickImage() {
+                obj=2;
+            }
+            function clickEraser() {
+                obj=3;
+            }
+            function clickCanvas(event, obj) {
+                var x = event.pageX - obj.offsetLeft;
+                var y = event.pageY - obj.offsetTop;
+                document.getElementById("xPos").setAttribute("value", x);
+                document.getElementById("yPos").setAttribute("value", y);
+            }
+        </script>
+    </head>
+    <body>
+        <div>
+            <div id="left">
+                <div id="add-new" class="box">
+                    <span class="box-title">THÊM ĐỐI TƯỢNG</span><br/>
+                    <input id="none-object" class="object-button" type="button" onclick="clickMouse();"/>
+                    <input id="add-text"    class="object-button" type="button" onclick="clickText();"/>
+                    <input id="add-image"   class="object-button" type="button" onclick="clickImage();"/>
+                    <input id="eraser"      class="object-button" type="button" onclick="clickEraser();"/>
+                </div>
+                <div id="properties" class="box">
+                    THUỘC TÍNH<br/>
+                    <select id="object" style="width: 70%;">
+
+                    </select>
+                    <br/>
+                    <input type="button" value="Xóa"/>
+                    <input type="button" value="Đổi tên"/>
+                    <input type="button" value="Khóa vị trí"/>
+                    <hr/>
+                    ĐỊNH DẠNG:<br/>
+                    <select name="font" style="width: 70%;">
+                        <option>Tahoma</option>
+                        <option>Verdana</option>
+                    </select>
+                    <select name="font-size" style="width: 25%;">
+                        <option>10</option>
+                        <option>20</option>
+                    </select>
+                    <input type="button" value="B" style="font-weight: bold;"/>
+                    <input type="button" value="I" style="font-style: italic;"/>
+                    <input type="button" value="U" style="text-decoration: underline;"/>
+                    <input type="button" value="S" style="text-decoration: line-through;"/>
+                    <hr/>
+                    MÀU SẮC:<br/>
+                </div>
+                <div id="go_to_page" class="box">DI CHUYỂN</div>
+                <div id="info" class="box">
+                    x: <input type="text" id="xPos" size="5"/>y:<input type="text" id="yPos" size="5"/>
+                </div>
+            </div>
+            <div id="viewer"></div>
+        </div>		
+    </body>
+</html>
